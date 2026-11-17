@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+
+const services = [
+  {
+    href: '/sluzby/kubernetes',
+    title: 'Kubernetes & cloud',
+    tagline: 'Platform engineering',
+    desc: 'Auto-managed Kubernetes clustery na AWS (EKS), Azure (AKS) nebo vašem vlastním hardwaru. GitOps, Infrastructure as Code, monitoring a provoz bez výpadků.',
+    bullets: ['Návrh a správa clusterů', 'Migrace aplikací do Kubernetes', 'Observabilita a SRE praktiky'],
+  },
+  {
+    href: '/sluzby/elasticsearch-rag',
+    title: 'Elasticsearch & RAG',
+    tagline: 'AI & vyhledávání',
+    desc: 'Fulltextové, vektorové a hybridní vyhledávání. RAG agenti nad vaší knowledge base a dokumenty — AI, která odpovídá z vašich dat a nehalucinuje.',
+    bullets: ['Enterprise search nad firemními daty', 'RAG a AI agenti', 'Self-hosted LLM na vašem HW'],
+  },
+  {
+    href: '/sluzby/spark-data-engineering',
+    title: 'Spark & data engineering',
+    tagline: 'Big data',
+    desc: 'Datové pipeline nad Apache Spark. Zpracování velkých objemů dat, reporting a analytika — z dat, která jen leží na disku, uděláme podklady pro rozhodování.',
+    bullets: ['ETL/ELT pipeline', 'Batch i streamové zpracování', 'Datové podklady pro AI a reporting'],
+  },
+  {
+    href: '/sluzby/vyvoj-na-miru',
+    title: 'Vývoj aplikací na míru',
+    tagline: 'Custom development',
+    desc: 'Webové aplikace a distribuované backendy na více nodů. Náhrada drahého SaaS řešením šitým přesně na vaše procesy — a provoz, na který je spoleh.',
+    bullets: ['Fullstack vývoj', 'Distribuované backendy', 'Náhrada SaaS řešením na míru'],
+  },
+];
+---
+
+<Layout
+  title="Služby — Jakub Černý"
+  description="Kubernetes a cloud, Elasticsearch a RAG agenti, Apache Spark a data engineering, vývoj aplikací na míru. Od návrhu po spolehlivý provoz."
+>
+  <section class="relative bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">Služby</p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-900 leading-tight mb-5">
+          Od nápadu po provoz
+        </h1>
+        <p class="text-lg text-brand-800 leading-relaxed">
+          Čtyři oblasti, ve&nbsp;kterých vám pomůžu. Společný jmenovatel:
+          nestavím demo, ale řešení, které poběží v&nbsp;produkci — škálovatelně,
+          bezpečně a&nbsp;bez&nbsp;výpadků.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div class="grid gap-8 md:grid-cols-2">
+      {services.map((s) => (
+        <article class="flex flex-col bg-white rounded-2xl p-8 border border-brand-100 hover:shadow-lg transition-shadow">
+          <p class="text-xs font-medium tracking-wider uppercase text-accent-600 mb-2">{s.tagline}</p>
+          <h2 class="font-serif text-2xl text-brand-900 mb-3">
+            <a href={s.href} class="hover:text-brand-600">{s.title}</a>
+          </h2>
+          <p class="text-brand-700 leading-relaxed mb-5">{s.desc}</p>
+          <ul class="space-y-2 mb-6">
+            {s.bullets.map((b) => (
+              <li class="flex items-center gap-2.5 text-sm text-brand-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-none text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+          <a href={s.href} class="mt-auto inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-800">
+            Více o službě <span aria-hidden>→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Průřezové principy -->
+  <section class="bg-brand-100/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-8">Co platí u všech služeb</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div>
+          <h3 class="font-serif text-xl text-brand-900 mb-2">Parťák, ne dodavatel</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Nečekám na&nbsp;zadávačku. Přemýšlím s&nbsp;vámi o&nbsp;byznysu,
+            upozorním na&nbsp;slepé uličky a&nbsp;navrhnu levnější cestu, když existuje.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-serif text-xl text-brand-900 mb-2">Provoz je součást dodávky</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Monitoring, zálohy, aktualizace a&nbsp;škálování. Co dodám,
+            to umím i&nbsp;dlouhodobě provozovat — nebo předat vašemu týmu
+            i&nbsp;s&nbsp;know-how.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-serif text-xl text-brand-900 mb-2">Vaše data, vaše pravidla</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Řešení stavím tak, aby data i&nbsp;modely mohly zůstat
+            ve&nbsp;vaší infrastruktuře — kvůli GDPR, AI&nbsp;Actu
+            i&nbsp;prosté nezávislosti na&nbsp;třetích stranách.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner />
+</Layout>

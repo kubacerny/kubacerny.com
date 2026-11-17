@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+
+const offerings = [
+  {
+    title: 'Managed cluster na AWS či Azure',
+    desc: 'Postavím a spravuji cluster na EKS nebo AKS — včetně sítí, IAM, autoscalingu a cost optimalizace, aby vás cloud nepřekvapil fakturou.',
+  },
+  {
+    title: 'Kubernetes na vašem hardwaru',
+    desc: 'On-premise cluster ve vaší serverovně. Plná kontrola nad daty, žádné cloudové poplatky — a přesto moderní platforma jako z cloudu.',
+  },
+  {
+    title: 'Migrace aplikací',
+    desc: 'Převedu stávající aplikace z VPS, Docker Compose nebo bare-metal do Kubernetes. Postupně, bez big-bang rizika a bez odstávek.',
+  },
+  {
+    title: 'GitOps & Infrastructure as Code',
+    desc: 'Celá infrastruktura v gitu — Terraform, Helm, ArgoCD/Flux. Každá změna dohledatelná, prostředí reprodukovatelné na jeden příkaz.',
+  },
+  {
+    title: 'Observabilita & SRE',
+    desc: 'Metriky, logy, tracing a alerting (Prometheus, Grafana, OpenTelemetry). O problému víte dřív, než ho zaznamenají zákazníci.',
+  },
+  {
+    title: 'CI/CD pipeline',
+    desc: 'Automatizované buildy, testy a nasazení. Release přestane být páteční adrenalin a stane se nudnou rutinou — tak, jak má.',
+  },
+];
+
+const reasons = [
+  {
+    title: 'Auto-managed, ne auto-opuštěný',
+    desc: 'Cluster nastavím tak, aby se o sebe maximálně staral sám — autoscaling, self-healing, automatické aktualizace. A když je potřeba lidský zásah, jsem tu já.',
+  },
+  {
+    title: 'Hybridní zkušenost',
+    desc: 'Stejně dobře se pohybuji v AWS, Azure i na železe ve vaší serverovně. Doporučím, co dává smysl pro váš workload a rozpočet — ne co je zrovna v módě.',
+  },
+  {
+    title: 'Provozoval jsem produkci ve velkém',
+    desc: 'Distribuované systémy na více nodů jsem stavěl a provozoval v Seznam.cz i ve vlastním startupu. Vím, co se v noci rozbíjí — a jak tomu předejít.',
+  },
+];
+---
+
+<Layout
+  title="Kubernetes & cloud — Jakub Černý"
+  description="Auto-managed Kubernetes clustery na AWS (EKS), Azure (AKS) i vlastním hardwaru. GitOps, Infrastructure as Code, observabilita a provoz bez výpadků."
+>
+  <section class="relative bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">
+          <a href="/sluzby" class="hover:text-brand-800">Služby</a> / Kubernetes &amp; cloud
+        </p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-900 leading-tight mb-5">
+          Kubernetes, který se stará sám
+        </h1>
+        <p class="text-lg text-brand-800 leading-relaxed">
+          Postavím vám auto-managed cluster na&nbsp;AWS, Azure nebo vašem
+          vlastním hardwaru. Infrastruktura jako kód, nasazení jedním commitem
+          a&nbsp;provoz, při kterém se v&nbsp;noci dobře spí.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-serif text-3xl text-brand-900 mb-10 text-center">Co pro vás udělám</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {offerings.map((o) => (
+        <article class="bg-white rounded-2xl p-6 border border-brand-100 hover:shadow-md transition-shadow">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">{o.title}</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">{o.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-brand-100/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-8">Proč to svěřit mně</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        {reasons.map((r) => (
+          <div>
+            <h3 class="font-serif text-xl text-brand-900 mb-2">{r.title}</h3>
+            <p class="text-sm text-brand-700 leading-relaxed">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-2xl mb-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-3">Nástroje, se kterými pracuji</h2>
+      <p class="text-brand-700 leading-relaxed">
+        Osvědčený cloud-native stack — žádné experimenty na&nbsp;vaší produkci.
+      </p>
+    </div>
+    <ul class="flex flex-wrap gap-2">
+      {['Kubernetes', 'AWS EKS', 'Azure AKS', 'Terraform', 'Helm', 'ArgoCD', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Docker', 'GitHub Actions', 'GitLab CI'].map((tech) => (
+        <li class="px-3 py-1.5 bg-white border border-brand-200 rounded-full text-sm text-brand-800">
+          {tech}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <CtaBanner
+    title="Chcete zkrotit svůj cluster?"
+    text="Ať začínáte na zelené louce, nebo vás trápí stávající provoz — pojďme to nezávazně probrat."
+  />
+</Layout>

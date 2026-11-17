@@ -1,0 +1,79 @@
+---
+import { GTM_ID } from 'astro:env/client';
+import '../styles/global.css';
+import Header from '../components/Header.tsx';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Jakub Černý — AI Engineer & Fullstack Developer',
+  description = 'Jakub Černý — vývoj AI řešení a aplikací na míru. Kubernetes, Elasticsearch, RAG agenti nad vašimi daty, Apache Spark. Od návrhu po spolehlivý provoz.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    {
+      GTM_ID && (
+        <Fragment>
+          <script is:inline async src={`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`} />
+          <script is:inline define:vars={{ GTM_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', GTM_ID);
+          </script>
+        </Fragment>
+      )
+    }
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Fonts loaded non-blocking:
+      1. preload as fetch so the browser discovers the URL early
+      2. rel="stylesheet" with media="print" so it doesn't block render
+      3. onload switches media to "all" once loaded
+      4. <noscript> fallback for JS-disabled browsers
+    -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header client:load currentPath={Astro.url.pathname} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,159 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { imgSrc } from '../../lib/img';
+import { CATEGORIES } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  // Sort descending by date — newest first
+  const sorted = [...allPosts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return sorted.map((post) => {
+    // Neighbors within the same category only
+    const catPosts = sorted.filter((p) => p.data.category === post.data.category);
+    const idx = catPosts.findIndex((p) => p.id === post.id);
+    return {
+      params: { slug: post.id },
+      props: {
+        post,
+        newerPost: catPosts[idx - 1] ?? null,  // lower index = newer (desc sort)
+        olderPost: catPosts[idx + 1] ?? null,  // higher index = older
+      },
+    };
+  });
+}
+
+const { post, newerPost, olderPost } = Astro.props;
+const { Content } = await render(post);
+const coverUrl = imgSrc(post.data.cover);
+const galleryUrls = (post.data.gallery ?? []).map((g) => imgSrc(g)).filter(Boolean) as string[];
+
+const categoryLabel = CATEGORIES[post.data.category].label;
+const categoryHref = CATEGORIES[post.data.category].serviceHref;
+const formattedDate = new Intl.DateTimeFormat('cs-CZ', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(post.data.date);
+---
+
+<Layout title={`${post.data.title} — Jakub Černý`} description={post.data.description}>
+  {/* Fixed edge arrows — left = newer, right = older */}
+  {newerPost && (
+    <a
+      id="nav-newer"
+      href={`/portfolio/${newerPost.id}`}
+      aria-label={`Novější: ${newerPost.data.title}`}
+      class="fixed left-0 top-1/2 -translate-y-1/2 z-40 hidden sm:flex items-center justify-center w-12 h-20 bg-white/80 hover:bg-white shadow-md rounded-r-2xl text-brand-700 hover:text-brand-900 transition-all opacity-0 hover:opacity-100 focus:opacity-100"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+  )}
+  {olderPost && (
+    <a
+      id="nav-older"
+      href={`/portfolio/${olderPost.id}`}
+      aria-label={`Starší: ${olderPost.data.title}`}
+      class="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden sm:flex items-center justify-center w-12 h-20 bg-white/80 hover:bg-white shadow-md rounded-l-2xl text-brand-700 hover:text-brand-900 transition-all opacity-0 hover:opacity-100 focus:opacity-100"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  )}
+
+  <article>
+    {coverUrl && (
+      <div class="w-full aspect-[21/9] sm:aspect-[21/8] overflow-hidden bg-brand-100">
+        <img src={coverUrl} alt={post.data.title} class="w-full h-full object-cover" />
+      </div>
+    )}
+
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <nav class="text-sm text-brand-600 mb-6">
+        <a href="/blog" class="hover:text-brand-800">Portfolio</a>
+        <span class="mx-2">/</span>
+        <a href={categoryHref} class="hover:text-brand-800">{categoryLabel}</a>
+      </nav>
+
+      <header class="mb-10">
+        <div class="flex items-center gap-3 text-sm text-brand-600 mb-4">
+          <span class="inline-block px-2.5 py-1 rounded-full bg-brand-100 text-brand-700 font-medium text-xs">
+            {categoryLabel}
+          </span>
+          <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+        </div>
+        <h1 class="font-serif text-4xl sm:text-5xl text-brand-900 leading-tight mb-4">
+          {post.data.title}
+        </h1>
+        <p class="text-lg text-brand-700 leading-relaxed">{post.data.description}</p>
+      </header>
+
+      <div class="prose-content">
+        <Content />
+      </div>
+
+      {galleryUrls.length > 0 && (
+        <section class="mt-12">
+          <h2 class="font-serif text-2xl text-brand-900 mb-5">Galerie</h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {galleryUrls.map((src) => (
+              <img src={src} alt="" loading="lazy" class="rounded-xl shadow-sm w-full" />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Bottom newer/older navigation */}
+      <div class="mt-16 pt-8 border-t border-brand-200 grid grid-cols-3 items-center gap-4 text-sm">
+        <div class="text-left">
+          {newerPost ? (
+            <a href={`/portfolio/${newerPost.id}`} class="group flex flex-col gap-1 text-brand-600 hover:text-brand-900">
+              <span class="text-xs text-brand-400 group-hover:text-brand-600">← Novější</span>
+              <span class="font-medium line-clamp-2">{newerPost.data.title}</span>
+            </a>
+          ) : <span />}
+        </div>
+        <div class="text-center">
+          <a href="/blog" class="text-brand-500 hover:text-brand-800 font-medium">Portfolio</a>
+        </div>
+        <div class="text-right">
+          {olderPost ? (
+            <a href={`/portfolio/${olderPost.id}`} class="group flex flex-col gap-1 text-brand-600 hover:text-brand-900">
+              <span class="text-xs text-brand-400 group-hover:text-brand-600">Starší →</span>
+              <span class="font-medium line-clamp-2">{olderPost.data.title}</span>
+            </a>
+          ) : <span />}
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<script define:vars={{ newerUrl: newerPost ? `/portfolio/${newerPost.id}` : null, olderUrl: olderPost ? `/portfolio/${olderPost.id}` : null }}>
+  // ArrowLeft = newer (back toward present), ArrowRight = older (deeper into past)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft'  && newerUrl) location.href = newerUrl;
+    if (e.key === 'ArrowRight' && olderUrl) location.href = olderUrl;
+  });
+
+  // Show edge arrows on first mouse movement
+  const elNewer = document.getElementById('nav-newer');
+  const elOlder = document.getElementById('nav-older');
+  document.addEventListener('mousemove', () => {
+    if (elNewer) elNewer.style.opacity = '1';
+    if (elOlder) elOlder.style.opacity = '1';
+  }, { once: true });
+
+  // Swipe left = older (going through history), swipe right = newer (going back)
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const threshold = 60;
+    if (dx < -threshold && olderUrl) location.href = olderUrl; // swipe left  → older
+    if (dx >  threshold && newerUrl) location.href = newerUrl; // swipe right → newer
+  }, { passive: true });
+</script>

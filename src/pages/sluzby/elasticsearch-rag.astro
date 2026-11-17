@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+
+const offerings = [
+  {
+    title: 'Enterprise search nad vašimi daty',
+    desc: 'Fulltextové vyhledávání nad dokumenty, produkty či interní wiki. Překlepy, skloňování, synonyma — vyhledávání, které funguje „jako Google“.',
+  },
+  {
+    title: 'RAG nad knowledge base',
+    desc: 'AI asistent, který odpovídá z vašich dokumentů a směrnic — s odkazem na zdroj. Retrieval-augmented generation výrazně omezuje halucinace.',
+  },
+  {
+    title: 'AI agenti',
+    desc: 'Agentic AI, která nejen odpovídá, ale i koná: vyhledá v systémech, založí ticket, připraví podklad. S jasnými mantinely a lidským dohledem.',
+  },
+  {
+    title: 'Vektorové & hybridní vyhledávání',
+    desc: 'Sémantické vyhledávání přes embeddingy kombinované s klasickým fulltextem (BM25). Uživatel najde i to, co neumí přesně pojmenovat.',
+  },
+  {
+    title: 'Self-hosted LLM',
+    desc: 'Open-source model nasazený na vašem hardwaru nebo privátním cloudu. Data neopouštějí firmu a neplatíte za každý token třetí straně.',
+  },
+  {
+    title: 'Vyhodnocování kvality',
+    desc: 'Evaluace odpovědí, guardrails proti prompt injection a monitoring kvality v čase. AI do produkce patří jen s měřitelnou kvalitou.',
+  },
+];
+---
+
+<Layout
+  title="Elasticsearch & RAG — Jakub Černý"
+  description="Fulltextové, vektorové a hybridní vyhledávání. RAG agenti nad vaší knowledge base, self-hosted LLM na vašem hardwaru — AI, která nehalucinuje."
+>
+  <section class="relative bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">
+          <a href="/sluzby" class="hover:text-brand-800">Služby</a> / Elasticsearch &amp; RAG
+        </p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-900 leading-tight mb-5">
+          AI, která zná vaše dokumenty
+        </h1>
+        <p class="text-lg text-brand-800 leading-relaxed">
+          RAG agent nad&nbsp;vaší knowledge base odpovídá z&nbsp;vašich dat —
+          ne&nbsp;z&nbsp;fantazie. Vyhledávání stavím přes dvacet let:
+          od&nbsp;fulltextu v&nbsp;Seznam.cz přes vlastní startup Persoo
+          až&nbsp;po&nbsp;dnešní vektorové vyhledávání a&nbsp;LLM.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-serif text-3xl text-brand-900 mb-10 text-center">Co pro vás udělám</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {offerings.map((o) => (
+        <article class="bg-white rounded-2xl p-6 border border-brand-100 hover:shadow-md transition-shadow">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">{o.title}</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">{o.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- AI pod vaší kontrolou -->
+  <section class="bg-brand-800 py-16 text-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-accent-400 mb-3">
+          GDPR &amp; EU AI Act
+        </p>
+        <h2 class="font-serif text-3xl sm:text-4xl mb-5">AI pod vaší kontrolou</h2>
+        <p class="text-brand-100 leading-relaxed mb-4">
+          Citlivá data nemusí putovat do&nbsp;cizích API. Model i&nbsp;vektorová
+          databáze můžou běžet u&nbsp;vás — na&nbsp;vašem hardwaru nebo
+          v&nbsp;privátním cloudu, pod&nbsp;vaší kontrolou. To výrazně
+          zjednodušuje ochranu osobních údajů a&nbsp;snižuje závislost
+          na&nbsp;třetích stranách.
+        </p>
+        <p class="text-brand-100 leading-relaxed">
+          Řešení navrhuji s&nbsp;ohledem na&nbsp;GDPR a&nbsp;požadavky evropského
+          AI&nbsp;Actu — klasifikace použití, logování, lidský dohled,
+          informování uživatelů. Compliance ladíme společně s&nbsp;vaším
+          právníkem či DPO; nejde o&nbsp;právní poradenství.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-2xl mb-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-3">Technologie, se kterými pracuji</h2>
+      <p class="text-brand-700 leading-relaxed">
+        Od&nbsp;indexu po&nbsp;prompt — celý řetězec pod&nbsp;jednou střechou.
+      </p>
+    </div>
+    <ul class="flex flex-wrap gap-2">
+      {['Elasticsearch', 'OpenSearch', 'vektorové databáze', 'RAG', 'LLM (OpenAI, Anthropic, open-source)', 'embeddingy', 'LangChain', 'Python', 'hybrid search (BM25 + vektory)', 'LLMOps'].map((tech) => (
+        <li class="px-3 py-1.5 bg-white border border-brand-200 rounded-full text-sm text-brand-800">
+          {tech}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <CtaBanner
+    title="Chcete AI nad svými daty?"
+    text="Přineste pár dokumentů a otázky, na které má AI odpovídat. Na první konzultaci vám ukážu, co je reálné — a co je jen hype."
+  />
+</Layout>

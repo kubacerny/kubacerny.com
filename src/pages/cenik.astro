@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const included = [
+  'Analýza a návrh architektury',
+  'Vývoj, testování a dokumentace',
+  'Nasazení do produkce (CI/CD)',
+  'Předávání know-how vašemu týmu',
+];
+
+const steps = [
+  {
+    title: '1. Nezávazná konzultace',
+    desc: 'Probereme váš záměr, projdeme stávající systémy a data. Zdarma — i kdybychom se domluvili, že nic nepotřebujete.',
+  },
+  {
+    title: '2. Odhad a nabídka',
+    desc: 'Dostanete srozumitelný odhad rozsahu v člověkodnech, návrh řešení a harmonogram. Žádná překvapení v půlce projektu.',
+  },
+  {
+    title: '3. Vývoj po etapách',
+    desc: 'Dodávám po menších funkčních celcích, které si průběžně ověřujete. Fakturuji podle skutečně odpracovaného času.',
+  },
+  {
+    title: '4. Provoz a podpora',
+    desc: 'Po dodání se o řešení umím dál starat — monitoring, aktualizace, škálování. Rozsah podpory si nastavíme podle potřeby.',
+  },
+];
+---
+
+<Layout
+  title="Ceník — Jakub Černý"
+  description="Transparentní ceník vývoje a konzultací — 12 000 Kč za člověkoden. Kubernetes, Elasticsearch, RAG, Spark, vývoj aplikací na míru."
+>
+  <section class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <header class="mb-12">
+      <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">Ceník</p>
+      <h1 class="font-serif text-4xl sm:text-5xl text-brand-900 mb-4">Jednoduše a transparentně</h1>
+      <p class="text-lg text-brand-700 leading-relaxed max-w-2xl">
+        Jedna sazba za&nbsp;všechno — konzultace, architekturu, vývoj
+        i&nbsp;provoz. Platíte jen skutečně odpracovaný čas.
+      </p>
+    </header>
+
+    <!-- Sazba -->
+    <div class="bg-brand-800 rounded-3xl p-8 sm:p-12 text-white mb-12">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+        <div>
+          <p class="text-sm font-medium tracking-wider uppercase text-brand-300 mb-2">Sazba</p>
+          <p class="font-serif text-5xl sm:text-6xl font-semibold">
+            12&nbsp;000&nbsp;Kč
+            <span class="text-2xl font-normal text-brand-200">/ člověkoden</span>
+          </p>
+        </div>
+        <a
+          href="/kontakt"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-800 font-medium hover:bg-brand-100 transition-colors self-start sm:self-end"
+        >
+          Domluvit konzultaci <span aria-hidden>→</span>
+        </a>
+      </div>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+        {included.map((item) => (
+          <li class="flex items-center gap-3 text-brand-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-none text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Jak to probíhá -->
+    <h2 class="font-serif text-3xl text-brand-900 mb-8">Jak spolupráce probíhá</h2>
+    <div class="grid gap-6 sm:grid-cols-2 mb-12">
+      {steps.map((s) => (
+        <div class="bg-white rounded-2xl p-6 border border-brand-100">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">{s.title}</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Poznámky -->
+    <div class="bg-brand-100/50 rounded-2xl p-6 sm:p-8">
+      <h2 class="font-serif text-2xl text-brand-900 mb-4">Dobré vědět</h2>
+      <ul class="space-y-3 text-brand-700 leading-relaxed">
+        <li class="flex gap-3">
+          <span class="text-accent-600 flex-none" aria-hidden>•</span>
+          <span>U&nbsp;menších, dobře ohraničených zadání se umíme domluvit na&nbsp;fixní ceně.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-accent-600 flex-none" aria-hidden>•</span>
+          <span>První konzultace je vždy zdarma — někdy je nejlepší rada „tohle nekupujte, stačí vám jednodušší řešení“.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-accent-600 flex-none" aria-hidden>•</span>
+          <span>Náklady na&nbsp;infrastrukturu (cloud, licence, hardware) jdou přímo za&nbsp;vámi — žádné skryté přirážky.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Layout>

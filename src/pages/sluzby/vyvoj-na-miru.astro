@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+
+const offerings = [
+  {
+    title: 'Webové aplikace',
+    desc: 'Interní portály, dashboardy a nástroje šité na míru vašemu workflow — od návrhu UI po backend a databázi.',
+  },
+  {
+    title: 'Distribuované backendy',
+    desc: 'Backend rozložený na více nodů, který přežije výpadek stroje i náhlou špičku. Navrhuji systémy, které škálují horizontálně.',
+  },
+  {
+    title: 'Náhrada SaaS na míru',
+    desc: 'Platíte drahé SaaS předplatné a používáte desetinu funkcí? Postavím vám verzi přesně na vaše procesy — efektivní, bez zbytečností a bez poplatků za každého uživatele.',
+  },
+  {
+    title: 'Integrace a API',
+    desc: 'Propojení systémů, které spolu dnes nemluví — účetnictví, sklad, CRM, e-shop. Čistá API, na kterých se dá dál stavět.',
+  },
+  {
+    title: 'Modernizace legacy aplikací',
+    desc: 'Postupná přestavba zastaralého systému bez zastavení provozu. Nejdřív testy a monitoring, pak refaktoring — žádný big-bang rewrite.',
+  },
+  {
+    title: 'Provoz a podpora',
+    desc: 'Hosting, zálohy, monitoring, aktualizace. Aplikace ode mě nekončí předáním — starám se, aby běžela bez výpadků i za pět let.',
+  },
+];
+---
+
+<Layout
+  title="Vývoj aplikací na míru — Jakub Černý"
+  description="Fullstack vývoj webových aplikací a distribuovaných backendů. Náhrada drahého SaaS řešením na míru. Od návrhu po spolehlivý provoz bez výpadků."
+>
+  <section class="relative bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">
+          <a href="/sluzby" class="hover:text-brand-800">Služby</a> / Vývoj aplikací na míru
+        </p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-900 leading-tight mb-5">
+          Aplikace, na které je spoleh
+        </h1>
+        <p class="text-lg text-brand-800 leading-relaxed">
+          Parťák pro&nbsp;vývoj — i&nbsp;pro&nbsp;složitější backend
+          distribuovaný na&nbsp;více nodů. Nejen to zvládnu vytvořit, ale
+          i&nbsp;provozovat: aby to fungovalo, škálovalo a&nbsp;běželo
+          bez&nbsp;výpadků.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-serif text-3xl text-brand-900 mb-10 text-center">Co pro vás udělám</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {offerings.map((o) => (
+        <article class="bg-white rounded-2xl p-6 border border-brand-100 hover:shadow-md transition-shadow">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">{o.title}</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">{o.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- SaaS vs. na míru -->
+  <section class="bg-brand-100/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="font-serif text-3xl text-brand-900 mb-5">Kdy se vyplatí jít na míru</h2>
+        <p class="text-brand-700 leading-relaxed mb-4">
+          SaaS je skvělý start. Jenže s&nbsp;růstem firmy rostou i&nbsp;poplatky
+          za&nbsp;uživatele, platíte za&nbsp;funkce, které nikdo nepoužívá,
+          a&nbsp;procesy ohýbáte podle nástroje místo naopak. Díky dnešním
+          nástrojům — včetně AI — je vývoj na&nbsp;míru rychlejší
+          a&nbsp;levnější než kdy dřív.
+        </p>
+        <p class="text-brand-700 leading-relaxed">
+          Řešení na&nbsp;míru dělá přesně to, co potřebujete: nemá zbytečnosti,
+          nežere víc zdrojů, než je nutné, a&nbsp;data máte u&nbsp;sebe.
+          Jednorázová investice se proti věčnému předplatnému často vrátí
+          během jednoho až&nbsp;dvou let.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-2xl mb-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-3">Technologie, se kterými pracuji</h2>
+      <p class="text-brand-700 leading-relaxed">
+        Moderní, ale osvědčený stack. Vyberu to nejjednodušší, co vaši úlohu vyřeší.
+      </p>
+    </div>
+    <ul class="flex flex-wrap gap-2">
+      {['TypeScript', 'Node.js', 'React', 'Astro', 'Java', 'Python', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'Docker', 'Kubernetes', 'GitHub Actions'].map((tech) => (
+        <li class="px-3 py-1.5 bg-white border border-brand-200 rounded-full text-sm text-brand-800">
+          {tech}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <CtaBanner
+    title="Máte v hlavě aplikaci?"
+    text="Popište mi, co vás brzdí — tabulky v Excelu, drahé SaaS, nebo systém, co nestíhá. Navrhnu nejkratší cestu k řešení."
+  />
+</Layout>

@@ -1,0 +1,242 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const latest = posts.slice(0, 3);
+
+const services = [
+  {
+    href: '/sluzby/kubernetes',
+    title: 'Kubernetes & cloud',
+    desc: 'Auto-managed clustery na AWS, Azure nebo vašem hardwaru. GitOps, observabilita, provoz bez výpadků.',
+    icon: 'M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM12 12l8-4.5M12 12v9M12 12L4 7.5',
+  },
+  {
+    href: '/sluzby/elasticsearch-rag',
+    title: 'Elasticsearch & RAG',
+    desc: 'Fulltextové i vektorové vyhledávání. AI agenti nad vaší knowledge base, kteří nehalucinují — odpovídají z vašich dokumentů.',
+    icon: 'M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z',
+  },
+  {
+    href: '/sluzby/spark-data-engineering',
+    title: 'Spark & data engineering',
+    desc: 'Datové pipeline a zpracování velkých objemů dat. Z dat, která jen leží na disku, uděláme podklady pro rozhodování.',
+    icon: 'M3 3v18h18M7 14l4-4 4 2 5-6',
+  },
+  {
+    href: '/sluzby/vyvoj-na-miru',
+    title: 'Vývoj aplikací na míru',
+    desc: 'Webové aplikace a distribuované backendy. Náhrada drahého SaaS řešením šitým přesně na vaše procesy.',
+    icon: 'M8 9l-4 3 4 3M16 9l4 3-4 3M14 4l-4 16',
+  },
+];
+
+const credentials = [
+  {
+    title: 'PhD v matematice',
+    desc: 'Matematicko-fyzikální fakulta UK v Praze. Algoritmy a datové struktury nejsou buzzwordy, ale řemeslo.',
+  },
+  {
+    title: 'Fulltext v Seznam.cz',
+    desc: 'Vývoj fulltextového vyhledávání pro jeden z největších českých webů. Vyhledávání ve velkém mi prošlo rukama.',
+  },
+  {
+    title: 'Startup Persoo → Luigi\u2019s Box',
+    desc: 'Založil jsem startup Persoo — AI personalizaci vyhledávání a doporučování pro e-shopy a banky (Dr.\u00A0Max, O2, Komerční banka). V roce 2024 ho převzal Luigi\u2019s Box.',
+  },
+  {
+    title: 'Data & web platformy',
+    desc: 'Datová analytika, webové platformy a aplikace na míru — od nástrojů pro SEO po interní systémy.',
+  },
+];
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 via-brand-50 to-white"></div>
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-4">
+          Jakub Černý — AI Engineer &amp; Fullstack Developer
+        </p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-brand-900 leading-tight mb-6">
+          AI nad vašimi daty.<br />
+          <span class="text-accent-600">Infrastruktura, která to unese.</span>
+        </h1>
+        <p class="text-lg sm:text-xl text-brand-800 leading-relaxed mb-8 max-w-2xl">
+          Stavím RAG agenty, vyhledávání a&nbsp;datové platformy — a&nbsp;Kubernetes
+          clustery, na&nbsp;kterých spolehlivě běží. Nejen vytvořím, ale
+          i&nbsp;provozuji: aby to škálovalo, běželo bez výpadků a&nbsp;dalo se
+          na&nbsp;to spolehnout.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/sluzby"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-700 text-white font-medium hover:bg-brand-800 transition-colors"
+          >
+            Co pro vás umím
+            <span aria-hidden>→</span>
+          </a>
+          <a
+            href="/kontakt"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-800 font-medium border border-brand-200 hover:bg-brand-100 transition-colors"
+          >
+            Nezávazná konzultace
+            <span aria-hidden>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Služby -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="font-serif text-3xl sm:text-4xl text-brand-900 mb-4">Co dělám</h2>
+      <p class="text-brand-700 leading-relaxed">
+        Dřív fullstack vývoj, dnes hlavně AI, vyhledávání a&nbsp;infrastruktura.
+        Jedno se nemění — dodávám věci, které fungují i&nbsp;za&nbsp;rok.
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2">
+      {services.map((s) => (
+        <article class="bg-white rounded-2xl p-8 border border-brand-100 hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-brand-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d={s.icon} />
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl text-brand-900 mb-3">{s.title}</h3>
+          <p class="text-brand-700 leading-relaxed mb-5">{s.desc}</p>
+          <a href={s.href} class="inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-800">
+            Více o službě <span aria-hidden>→</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Proč se mnou -->
+  <section class="bg-brand-100/40 py-16 sm:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mb-12">
+        <h2 class="font-serif text-3xl sm:text-4xl text-brand-900 mb-4">Proč se mnou</h2>
+        <p class="text-brand-700 leading-relaxed">
+          Jsem parťák pro vývoj — i&nbsp;pro složitější backend distribuovaný
+          na&nbsp;více nodů. A&nbsp;vždycky přemýšlím o&nbsp;tom, co bude
+          s&nbsp;projektem za&nbsp;rok.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="bg-white rounded-2xl p-6 border border-brand-100">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">Vytvořím i provozuji</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Nekončím předáním zdrojáků. Řešení nasadím, nastavím monitoring
+            a&nbsp;postarám se, aby škálovalo a&nbsp;běželo bez výpadků.
+            Na&nbsp;funkčnost toho, co dodám, je spolehnutí.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-brand-100">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">Na míru místo SaaS</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Drahé SaaS předplatné dnes často nahradí řešení upravené
+            přesně pro&nbsp;vás — bez zbytečných funkcí, bez plýtvání zdroji
+            a&nbsp;bez měsíčních poplatků, které rostou s&nbsp;každým uživatelem.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-brand-100">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">AI pod vaší kontrolou</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">
+            Umím AI nasadit tak, že model běží u&nbsp;vás, na&nbsp;vašem hardwaru.
+            Data neopouštějí firmu — což usnadňuje GDPR i&nbsp;přípravu
+            na&nbsp;požadavky evropského AI&nbsp;Actu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reference / zkušenosti -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div class="max-w-2xl mb-12">
+      <h2 class="font-serif text-3xl sm:text-4xl text-brand-900 mb-4">Čím jsem si prošel</h2>
+      <p class="text-brand-700 leading-relaxed">
+        Přes dvacet let od&nbsp;matematiky přes vyhledávače po&nbsp;vlastní startup.
+      </p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {credentials.map((c) => (
+        <div class="flex gap-4">
+          <div class="flex-none w-10 h-10 rounded-lg bg-accent-500/15 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-serif text-xl text-brand-900 mb-1">{c.title}</h3>
+            <p class="text-sm text-brand-700 leading-relaxed">{c.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Poslední z portfolia -->
+  {latest.length > 0 && (
+    <section class="bg-brand-100/40 py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between gap-4 mb-10">
+          <div>
+            <h2 class="font-serif text-3xl sm:text-4xl text-brand-900 mb-2">Z portfolia</h2>
+            <p class="text-brand-700">Vybrané projekty a case studies.</p>
+          </div>
+          <a href="/portfolio" class="hidden sm:inline-flex items-center gap-1 text-brand-600 font-medium hover:text-brand-800">
+            Celé portfolio <span aria-hidden>→</span>
+          </a>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {latest.map((post) => (
+            <BlogCard
+              href={`/portfolio/${post.id}`}
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              category={post.data.category}
+              cover={post.data.cover}
+            />
+          ))}
+        </div>
+
+        <div class="mt-8 sm:hidden">
+          <a href="/portfolio" class="inline-flex items-center gap-1 text-brand-600 font-medium">
+            Celé portfolio <span aria-hidden>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div class="bg-brand-800 rounded-3xl p-8 sm:p-12 lg:p-16 text-center text-white">
+      <h2 class="font-serif text-3xl sm:text-4xl mb-4">Máte záměr? Pojďme se o&nbsp;něm pobavit.</h2>
+      <p class="text-brand-200 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Ať už chcete AI agenta nad&nbsp;firemními dokumenty, zkrotit Kubernetes,
+        nebo postavit aplikaci na&nbsp;míru — první konzultace je vždy nezávazná.
+      </p>
+      <a
+        href="/kontakt"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-brand-800 font-medium hover:bg-brand-100 transition-colors"
+      >
+        Kontaktujte mě <span aria-hidden>→</span>
+      </a>
+    </div>
+  </section>
+</Layout>

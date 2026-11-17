@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+
+const offerings = [
+  {
+    title: 'ETL/ELT pipeline',
+    desc: 'Spolehlivé datové pipeline, které denně přelévají a čistí data z vašich systémů — idempotentně, s monitoringem a bez ručních zásahů.',
+  },
+  {
+    title: 'Zpracování velkých objemů',
+    desc: 'Apache Spark zvládne terabajty tam, kde SQL skript běží hodiny. Logy, transakce, produktová data — zpracovaná v minutách.',
+  },
+  {
+    title: 'Streamové zpracování',
+    desc: 'Události zpracované průběžně, ne až v nočním batchi. Reporty a detekce anomálií s minutovou, ne denní latencí.',
+  },
+  {
+    title: 'Datové podklady pro AI',
+    desc: 'Kvalita AI stojí na kvalitě dat. Připravím čisté, strukturované datasety pro RAG, doporučování i strojové učení.',
+  },
+  {
+    title: 'Reporting & analytika',
+    desc: 'Z provozních dat srozumitelné reporty a dashboardy. V Persoo jsme na datech postavili celý produkt — vím, co funguje.',
+  },
+  {
+    title: 'Optimalizace nákladů',
+    desc: 'Špatně napsaný Spark job spálí cloudový rozpočet za odpoledne. Zrychlím a zlevním i stávající pipeline.',
+  },
+];
+---
+
+<Layout
+  title="Spark & data engineering — Jakub Černý"
+  description="Datové pipeline nad Apache Spark. ETL/ELT, batch i streamové zpracování velkých dat, datové podklady pro AI a reporting."
+>
+  <section class="relative bg-gradient-to-br from-brand-100 via-brand-50 to-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="max-w-3xl">
+        <p class="text-sm font-medium tracking-wider uppercase text-brand-600 mb-3">
+          <a href="/sluzby" class="hover:text-brand-800">Služby</a> / Spark &amp; data engineering
+        </p>
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-900 leading-tight mb-5">
+          Data, která pracují pro vás
+        </h1>
+        <p class="text-lg text-brand-800 leading-relaxed">
+          Většina firem na&nbsp;datech sedí, místo aby na&nbsp;nich vydělávala.
+          Postavím vám datové pipeline nad&nbsp;Apache Spark — od&nbsp;sběru
+          přes čištění po&nbsp;reporting a&nbsp;podklady pro&nbsp;AI.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="font-serif text-3xl text-brand-900 mb-10 text-center">Co pro vás udělám</h2>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {offerings.map((o) => (
+        <article class="bg-white rounded-2xl p-6 border border-brand-100 hover:shadow-md transition-shadow">
+          <h3 class="font-serif text-xl text-brand-900 mb-2">{o.title}</h3>
+          <p class="text-sm text-brand-700 leading-relaxed">{o.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-brand-100/40 py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="font-serif text-3xl text-brand-900 mb-5">Matematika v pozadí</h2>
+        <p class="text-brand-700 leading-relaxed mb-4">
+          Data engineering není jen přesouvání dat z&nbsp;bodu A do&nbsp;bodu B.
+          Jde o&nbsp;správné algoritmy, statistiku a&nbsp;porozumění tomu, co
+          čísla skutečně říkají. S&nbsp;doktorátem z&nbsp;matematiky
+          (MFF&nbsp;UK) a&nbsp;zkušeností z&nbsp;fulltextu Seznam.cz
+          i&nbsp;AI startupu Persoo vím, kdy stačí průměr —
+          a&nbsp;kdy je potřeba pořádný model.
+        </p>
+        <p class="text-brand-700 leading-relaxed">
+          A&nbsp;protože pipeline musí hlavně spolehlivě běžet, dostanete ji
+          nasazenou v&nbsp;Kubernetes, s&nbsp;monitoringem a&nbsp;alertingem —
+          ne&nbsp;jako skript, který někdo musí ráno kontrolovat.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-2xl mb-8">
+      <h2 class="font-serif text-3xl text-brand-900 mb-3">Technologie, se kterými pracuji</h2>
+    </div>
+    <ul class="flex flex-wrap gap-2">
+      {['Apache Spark', 'Python', 'Scala', 'Kafka', 'PostgreSQL', 'Elasticsearch', 'Parquet', 'Airflow', 'dbt', 'S3 / object storage', 'Kubernetes'].map((tech) => (
+        <li class="px-3 py-1.5 bg-white border border-brand-200 rounded-full text-sm text-brand-800">
+          {tech}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <CtaBanner
+    title="Ležet na datech se nevyplácí"
+    text="Přijďte s konkrétní otázkou, na kterou vám data mají odpovědět. Cestu k odpovědi vymyslíme spolu."
+  />
+</Layout>

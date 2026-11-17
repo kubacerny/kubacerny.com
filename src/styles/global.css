@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  /*
+    Brand = hluboká modrá: důvěryhodnost, stabilita, technická zodpovědnost.
+    Odstíny laděné na WCAG AA — brand-600 na bílé ≥ 4.5:1 (běžný text),
+    brand-200/300 jen na tmavých plochách.
+  */
+  --color-brand-50: #f4f8fb;
+  --color-brand-100: #e6eef6;
+  --color-brand-200: #cbdeed;
+  --color-brand-300: #9fc2dd;
+  --color-brand-400: #699dc4;
+  --color-brand-500: #437ba6;
+  --color-brand-600: #31618a;
+  --color-brand-700: #294e6f;
+  --color-brand-800: #1f3a53;
+  --color-brand-900: #152636;
+  /*
+    Accent = cyan: svěžest a flexibilita. Používat střídmě — CTA detaily,
+    ikony, zvýraznění. accent-600 má na bílé kontrast ~4.9:1.
+  */
+  --color-accent-300: #67e8f9;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0e7490;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Nadpisy: Space Grotesk — technický, ale přátelský geometrický grotesk. */
+  --font-serif: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-brand-50 text-brand-900 font-sans antialiased;
+}
+
+h1, h2, h3, h4 {
+  @apply font-serif tracking-tight;
+}
+
+.prose-content :where(h2) {
+  @apply font-serif text-3xl mt-10 mb-4;
+}
+.prose-content :where(h3) {
+  @apply font-serif text-2xl mt-8 mb-3;
+}
+.prose-content :where(p) {
+  @apply leading-relaxed my-4 text-brand-800;
+}
+.prose-content :where(img) {
+  @apply rounded-xl shadow-md my-6 w-full;
+}
+.prose-content :where(ul) {
+  @apply list-disc pl-6 my-4 space-y-1;
+}
+.prose-content :where(a) {
+  @apply text-brand-600 underline underline-offset-2 hover:text-brand-800;
+}

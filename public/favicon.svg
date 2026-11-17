@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#294e6f" />
+  <circle cx="98" cy="30" r="8" fill="#22d3ee" />
+  <text
+    x="58"
+    y="90"
+    text-anchor="middle"
+    font-family="'Space Grotesk', 'Inter', system-ui, sans-serif"
+    font-size="64"
+    font-weight="700"
+    fill="#ffffff"
+  >JČ</text>
+</svg>
