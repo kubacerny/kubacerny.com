@@ -16,7 +16,7 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         optional: true,
-        default: 'GTM-TFLNJ33L',
+        default: 'GTM-K8JMW7VZ',
       }),
     },
   },
